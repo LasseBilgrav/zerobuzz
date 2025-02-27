@@ -11,10 +11,8 @@
     --button-color: #6CC7ED;
 }
 
-main {
-    background-color: var(--background-color);
-    background-image: url('../img/web-baggrund-removed-midt.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
