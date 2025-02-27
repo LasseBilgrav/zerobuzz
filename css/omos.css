@@ -8,3 +8,43 @@
     --background-color: #c6d9fa;
     --button-color: #6CC7ED;
 }
+
+ #omos{
+    font-family: 'Aladin', sans-serif;
+    text-align: center;
+    background-color: var(--background-color);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+#omos h1 {
+    font-size: 4rem;
+    margin: 0;
+}
+
+#omos-p {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+
+#button {
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#button {
+    background-color: var(--button-color);
+    color: black;
+}
