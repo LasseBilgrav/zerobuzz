@@ -6,11 +6,11 @@ function checkAge() {
         return; // Stop the function, user is already verified
     }
 
-    let birthdate = prompt("Indtast din fødselsdato i følgende format: (YYYY-MM-DD):");
+    let birthdate = prompt("Indtast din fødselsdato i følgende format: (DD-MM-YYYY):");
 
     // Validate format
-    if (!birthdate || !/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
-        alert("Forkert format! Indtast din fødselsdato i følgende format: (YYYY-MM-DD)");
+    if (!birthdate || !/^\d{2}-\d{2}-\d{4}$/.test(birthdate)) {
+        alert("Forkert format! Indtast din fødselsdato i følgende format: (DD-MM-YYYY)");
         return checkAge(); // Ask again
     }
 
@@ -31,7 +31,12 @@ function checkAge() {
         localStorage.setItem("accessGranted", "true"); // Store access granted flag
     } else {
         alert("Du skal være minimum 18 år for at besøge denne side.");
-        window.location.href = "https://www.google.com"; // Redirect underage users
+    }
+    let previousPage = document.referrer;
+    if (previousPage) {
+        window.location.href = previousPage; // Redirect to the previous page
+    } else {
+        window.location.href = "/"; // If no referrer, go to the homepage
     }
 }
 
