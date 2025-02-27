@@ -6,9 +6,14 @@
     box-sizing: border-box;
 }
 
+:root {
+    --background-color: #c6d9fa;
+    --button-color: #6CC7ED;
+}
+
 /* Navigation styles start*/
 .nav-container {
-    background-color:#6CC7ED;
+    background-color: var(--button-color);
     background-image: url('../img/baggrund-header.png');
     display: flex;
     align-items: center;
