@@ -67,6 +67,15 @@
 
 /* Navigation styles slut*/
 
+/* Baggrund styling*/
+main {
+    background-color: var(--background-color);
+    background-image: url('../img/web-baggrund-removed-midt.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* footer starter */
 .main-footer {
     background-color: black;
