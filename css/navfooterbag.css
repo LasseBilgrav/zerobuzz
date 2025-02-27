@@ -9,6 +9,7 @@
 /* Navigation styles start*/
 .nav-container {
     background-color:#6CC7ED;
+    background-image: url('../img/baggrund-header.png');
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
