@@ -6,11 +6,11 @@ function checkAge() {
         return; // Stop the function, user is already verified
     }
 
-    let birthdate = prompt("Indtast din fødselsdato i følgende format: (YYYY-MM-DD):");
+    let birthdate = prompt("Indtast din fødselsdato i følgende format: (DD-MM-YYYY):");
 
     // Validate format
-    if (!birthdate || !/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
-        alert("Forkert format! Indtast din fødselsdato i følgende format: (YYYY-MM-DD)");
+    if (!birthdate || !/^\d{2}-\d{2}-\d{4}$/.test(birthdate)) {
+        alert("Forkert format! Indtast din fødselsdato i følgende format: (DD-MM-YYYY)");
         return checkAge(); // Ask again
     }
 
