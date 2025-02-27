@@ -63,11 +63,9 @@
     transition: 0.3s;
 }
 
-
-
 /* Navigation styles slut*/
 
-/* Baggrund styling*/
+/* Baggrund styling start*/
 main {
     background-color: var(--background-color);
     background-image: url('../img/web-baggrund-removed-midt.png');
@@ -75,6 +73,8 @@ main {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Baggrund styling slut*/
 
 /* footer starter */
 .main-footer {
