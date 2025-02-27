@@ -8,7 +8,7 @@
 
 /* Navigation styles start*/
 .nav-container {
-    background-color: #00b7ff;
+    background-color:#6CC7ED;
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
@@ -44,7 +44,7 @@
 .nav-links a {
     color: black;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 2.5rem;
     font-family: sans-serif;
     font-family: "aladin", sans-serif;
     font-weight: 400;
@@ -52,8 +52,10 @@
 }
 
 .nav-links a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
+
+
 
 /* Navigation styles slut*/
 
