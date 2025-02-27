@@ -31,7 +31,12 @@ function checkAge() {
         localStorage.setItem("accessGranted", "true"); // Store access granted flag
     } else {
         alert("Du skal være minimum 18 år for at besøge denne side.");
-        window.location.href = "https://www.google.com"; // Redirect underage users
+    }
+    let previousPage = document.referrer;
+    if (previousPage) {
+        window.location.href = previousPage; // Redirect to the previous page
+    } else {
+        window.location.href = "/"; // If no referrer, go to the homepage
     }
 }
 
