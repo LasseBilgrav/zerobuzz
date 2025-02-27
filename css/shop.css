@@ -1,0 +1,78 @@
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+/* Produktkort */
+.product-card {
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    width: auto;
+    height: 150px;
+    margin-bottom: 0.5rem;
+    object-fit: contain;
+}
+
+.product-details {
+    width: 100%;
+    text-align: center;
+}
+
+.product-price {
+    font-weight: bold;
+}
+
+.info-link {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    color: #555;
+    text-decoration: none;
+}
+
+.product-title {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.product-controls {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.add-button, .remove-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #333;
+}
