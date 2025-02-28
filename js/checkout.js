@@ -1,91 +1,200 @@
 "use strict";
 
-// Shopping cart object
-let cart = JSON.parse(localStorage.getItem("cart")) || {};
+// Varekurv struktur
+let cart = {
+    items: {},
+    totalQuantity: 0,
+    totalPrice: 0
+};
 
-// Function to update cart UI
-function updateCartUI() {
-    const cartSection = document.querySelector("section:nth-child(2)"); // Assuming cart section is the second section
-    cartSection.innerHTML = "<h2>Indkøbskurv</h2>";
-
-    let total = 0;
-    let cartItems = Object.keys(cart);
-
-    if (cartItems.length === 0) {
-        cartSection.innerHTML += "<p>Kurven er tom</p>";
-    } else {
-        let ul = document.createElement("ul");
-        cartItems.forEach((product) => {
-            let li = document.createElement("li");
-            li.textContent = `${product} x${cart[product].quantity} - ${cart[product].price * cart[product].quantity} kr`;
-            ul.appendChild(li);
-            total += cart[product].price * cart[product].quantity;
-        });
-        cartSection.appendChild(ul);
-    }
-
-    // Show total price
-    let totalPrice = document.createElement("p");
-    totalPrice.innerHTML = `<strong>Total: ${total} kr</strong>`;
-    cartSection.appendChild(totalPrice);
-
-    // Add clear cart button
-    let clearButton = document.createElement("button");
-    clearButton.textContent = "Tøm kurv";
-    clearButton.addEventListener("click", clearCart);
-    cartSection.appendChild(clearButton);
-}
-
-// Function to add an item to the cart
-function addToCart(productName, price) {
-    if (!cart[productName]) {
-        cart[productName] = { quantity: 1, price };
-    } else {
-        cart[productName].quantity++;
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartUI();
-}
-
-// Function to remove an item from the cart
-function removeFromCart(productName) {
-    if (cart[productName]) {
-        cart[productName].quantity--;
-        if (cart[productName].quantity <= 0) {
-            delete cart[productName];
-        }
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartUI();
-}
-
-// Function to clear the cart
-function clearCart() {
-    cart = {};
-    localStorage.removeItem("cart");
-    updateCartUI();
-}
-
-// Attach event listeners to all + and - buttons
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".add-button").forEach((button) => {
-        button.addEventListener("click", (event) => {
-            event.preventDefault();
-            const productCard = event.target.closest(".product-card");
-            const productName = productCard.querySelector(".product-title").textContent;
-            const price = parseInt(productCard.querySelector(".product-price").textContent);
-            addToCart(productName, price);
-        });
-    });
-
-    document.querySelectorAll(".remove-button").forEach((button) => {
-        button.addEventListener("click", (event) => {
-            event.preventDefault();
-            const productCard = event.target.closest(".product-card");
-            const productName = productCard.querySelector(".product-title").textContent;
-            removeFromCart(productName);
-        });
-    });
-
-    updateCartUI(); // Initialize cart on page load
+// Initialiser når DOM er indlæst
+document.addEventListener('DOMContentLoaded', () => {
+    // Opret checkout container
+    createCheckoutContainer();
+    
+    // Tilføj event listeners til knapper
+    setupButtonListeners();
 });
+
+// Funktion til at oprette checkout container
+function createCheckoutContainer() {
+    const checkoutContainer = document.createElement('div');
+    checkoutContainer.className = 'cart-container';
+    checkoutContainer.innerHTML = `
+        <div class="cart-header">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-count">0</span>
+        </div>
+        <div class="cart-items">
+            <!-- Her tilføjes varer dynamisk -->
+        </div>
+        <div class="cart-total">Total: 0 kr</div>
+        <button class="checkout-button" style="display: none;">Checkout</button>
+    `;
+    
+    // Tilføj checkout knap styling
+    const style = document.createElement('style');
+    style.textContent = `
+        .cart-total {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: right;
+        }
+        .checkout-button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .checkout-button:hover {
+            background-color: #45a049;
+        }
+        .cart-count {
+            background-color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Tilføj til body
+    document.body.appendChild(checkoutContainer);
+    
+    // Tilføj event listener til checkout knap
+    const checkoutButton = checkoutContainer.querySelector('.checkout-button');
+    checkoutButton.addEventListener('click', handleCheckout);
+}
+
+// Funktion til at opsætte knap event listeners
+function setupButtonListeners() {
+    // Find alle add knapper
+    const addButtons = document.querySelectorAll('.add-button');
+    addButtons.forEach(button => {
+        button.addEventListener('click', handleAddToCart);
+    });
+    
+    // Find alle remove knapper
+    const removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', handleRemoveFromCart);
+    });
+}
+
+// Funktion til at håndtere tilføjelse af varer
+function handleAddToCart(event) {
+    const productCard = event.target.closest('.product-card');
+    if (!productCard) return;
+    
+    // Hent produkt information
+    const productTitle = productCard.querySelector('.product-title').textContent;
+    const productPrice = parseInt(productCard.querySelector('.product-price').textContent);
+    
+    // Opret et unikt id baseret på titlen
+    const productId = productTitle.toLowerCase().replace(/\s+/g, '-');
+    
+    // Tilføj til kurv
+    if (cart.items[productId]) {
+        cart.items[productId].quantity++;
+    } else {
+        cart.items[productId] = {
+            name: productTitle,
+            price: productPrice,
+            quantity: 1
+        };
+    }
+    
+    // Opdater totaler
+    cart.totalQuantity++;
+    cart.totalPrice += productPrice;
+    
+    // Opdater visning
+    updateCartDisplay();
+}
+
+// Funktion til at håndtere fjernelse af varer
+function handleRemoveFromCart(event) {
+    const productCard = event.target.closest('.product-card');
+    if (!productCard) return;
+    
+    // Hent produkt information
+    const productTitle = productCard.querySelector('.product-title').textContent;
+    const productPrice = parseInt(productCard.querySelector('.product-price').textContent);
+    
+    // Opret et unikt id baseret på titlen
+    const productId = productTitle.toLowerCase().replace(/\s+/g, '-');
+    
+    // Fjern fra kurv hvis produktet findes
+    if (cart.items[productId] && cart.items[productId].quantity > 0) {
+        cart.items[productId].quantity--;
+        cart.totalQuantity--;
+        cart.totalPrice -= productPrice;
+        
+        // Fjern produktet helt hvis antal er 0
+        if (cart.items[productId].quantity === 0) {
+            delete cart.items[productId];
+        }
+        
+        // Opdater visning
+        updateCartDisplay();
+    }
+}
+
+// Funktion til at opdatere kurv visning
+function updateCartDisplay() {
+    // Opdater antal
+    const cartCount = document.querySelector('.cart-count');
+    cartCount.textContent = cart.totalQuantity;
+    
+    // Opdater vareliste
+    const cartItems = document.querySelector('.cart-items');
+    cartItems.innerHTML = '';
+    
+    // Tilføj hver vare til listen
+    for (const id in cart.items) {
+        const item = cart.items[id];
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+            <span class="cart-item-name">${item.name} x ${item.quantity}</span>
+            <span class="cart-item-price">${item.price * item.quantity} kr</span>
+        `;
+        cartItems.appendChild(itemElement);
+    }
+    
+    // Opdater total
+    const cartTotal = document.querySelector('.cart-total');
+    cartTotal.textContent = `Total: ${cart.totalPrice} kr`;
+    
+    // Vis/skjul checkout knap
+    const checkoutButton = document.querySelector('.checkout-button');
+    checkoutButton.style.display = cart.totalQuantity > 0 ? 'block' : 'none';
+}
+
+// Funktion til at håndtere checkout
+function handleCheckout() {
+    if (cart.totalQuantity > 0) {
+        alert(`Tak for din ordre! Du har købt varer for ${cart.totalPrice} kr.`);
+        
+        // Nulstil kurv
+        cart.items = {};
+        cart.totalQuantity = 0;
+        cart.totalPrice = 0;
+        
+        // Opdater visning
+        updateCartDisplay();
+    }
+}
