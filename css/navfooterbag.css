@@ -14,7 +14,9 @@
 /* Navigation styles start*/
 .nav-container {
     background-color: var(--button-color);
-    background-image: url('../img/baggrund-header.png');
+    background-image: url('../img/baggrund-header.svg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
@@ -73,7 +75,7 @@
 /* Baggrund styling start*/
 main {
     background-color: var(--background-color);
-    background-image: url('../img/web-baggrund-removed-midt.png');
+    background-image: url('../img/baggrund-svg.svg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
