@@ -18,20 +18,26 @@ video {
     object-fit: cover;
 }
 
+#sec-button {
+    display: flex;
+    justify-content: center; 
+    align-items: center;      
+}
+
 #shop-button {
     background-color: var(--button-color);
     color: black;
     font-family:"aladin", sans-serif;
-    padding: 10px 20px;
+    padding: 0.5rem 2rem;
     border: none;
     border-radius: 5px;
     font-size: 3rem;
     font-weight: bold;
     cursor: pointer;
-    text-decoration: none
+    text-decoration: none;
 }
 
 #shop-button:hover {
-    background-color: #5eb7dd;
+    background-color: #57a9cd;
     transition: 0.3s;
 }
