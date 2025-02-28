@@ -1,4 +1,16 @@
+@import url('https://use.typekit.net/lou4nne.css');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "myriad-pro", sans-serif;
+}
+
+:root {
+    --background-color: #c6d9fa;
+    --button-color: #6CC7ED;
+}
 
 .product-grid {
     display: grid;
@@ -34,6 +46,8 @@
 
 .product-price {
     font-weight: bold;
+    font-family: "Aladin", sans-serif;
+    font-size: 1.2rem;
 }
 
 .info-link {
@@ -59,6 +73,8 @@
 .product-title {
     margin: 0.5rem 0;
     font-size: 1.1rem;
+    font-family: "Aladin", sans-serif;
+    font-size: 1.3rem;
 }
 
 .product-description {
