@@ -25,10 +25,9 @@ video {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 20px;
     text-decoration: none
 }
 
