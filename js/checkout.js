@@ -1,91 +1,74 @@
 "use strict";
 
-// Shopping cart object
-let cart = JSON.parse(localStorage.getItem("cart")) || {};
-
-// Function to update cart UI
-function updateCartUI() {
-    const cartSection = document.querySelector("section:nth-child(2)"); // Assuming cart section is the second section
-    cartSection.innerHTML = "<h2>Indkøbskurv</h2>";
-
-    let total = 0;
-    let cartItems = Object.keys(cart);
-
-    if (cartItems.length === 0) {
-        cartSection.innerHTML += "<p>Kurven er tom</p>";
-    } else {
-        let ul = document.createElement("ul");
-        cartItems.forEach((product) => {
-            let li = document.createElement("li");
-            li.textContent = `${product} x${cart[product].quantity} - ${cart[product].price * cart[product].quantity} kr`;
-            ul.appendChild(li);
-            total += cart[product].price * cart[product].quantity;
-        });
-        cartSection.appendChild(ul);
-    }
-
-    // Show total price
-    let totalPrice = document.createElement("p");
-    totalPrice.innerHTML = `<strong>Total: ${total} kr</strong>`;
-    cartSection.appendChild(totalPrice);
-
-    // Add clear cart button
-    let clearButton = document.createElement("button");
-    clearButton.textContent = "Tøm kurv";
-    clearButton.addEventListener("click", clearCart);
-    cartSection.appendChild(clearButton);
-}
-
-// Function to add an item to the cart
-function addToCart(productName, price) {
-    if (!cart[productName]) {
-        cart[productName] = { quantity: 1, price };
-    } else {
-        cart[productName].quantity++;
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartUI();
-}
-
-// Function to remove an item from the cart
-function removeFromCart(productName) {
-    if (cart[productName]) {
-        cart[productName].quantity--;
-        if (cart[productName].quantity <= 0) {
-            delete cart[productName];
-        }
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartUI();
-}
-
-// Function to clear the cart
-function clearCart() {
-    cart = {};
-    localStorage.removeItem("cart");
-    updateCartUI();
-}
-
-// Attach event listeners to all + and - buttons
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".add-button").forEach((button) => {
-        button.addEventListener("click", (event) => {
-            event.preventDefault();
-            const productCard = event.target.closest(".product-card");
-            const productName = productCard.querySelector(".product-title").textContent;
-            const price = parseInt(productCard.querySelector(".product-price").textContent);
-            addToCart(productName, price);
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartList = document.querySelector(".cart-items");
+    const totalPriceElement = document.getElementById("total-price");
+    const clearCartBtn = document.querySelector(".clear-cart");
+
+    function updateCart() {
+        cartList.innerHTML = "";
+        let total = 0;
+
+        cartItems.forEach((item, index) => {
+            total += item.price * item.quantity;
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${item.name} - ${item.price} kr x ${item.quantity}
+                <button class="decrease" data-index="${index}">-</button>
+                <button class="increase" data-index="${index}">+</button>
+                <button class="remove" data-index="${index}">❌</button>
+            `;
+            cartList.appendChild(li);
+        });
+
+        totalPriceElement.textContent = `${total} kr`;
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", () => {
+            const name = button.dataset.name;
+            const price = parseInt(button.dataset.price);
+
+            const existingItem = cartItems.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cartItems.push({ name, price, quantity: 1 });
+            }
+
+            updateCart();
         });
     });
 
-    document.querySelectorAll(".remove-button").forEach((button) => {
-        button.addEventListener("click", (event) => {
-            event.preventDefault();
-            const productCard = event.target.closest(".product-card");
-            const productName = productCard.querySelector(".product-title").textContent;
-            removeFromCart(productName);
-        });
+    cartList.addEventListener("click", (event) => {
+        const index = event.target.dataset.index;
+
+        if (event.target.classList.contains("decrease")) {
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+            } else {
+                cartItems.splice(index, 1);
+            }
+        }
+
+        if (event.target.classList.contains("increase")) {
+            cartItems[index].quantity++;
+        }
+
+        if (event.target.classList.contains("remove")) {
+            cartItems.splice(index, 1);
+        }
+
+        updateCart();
     });
 
-    updateCartUI(); // Initialize cart on page load
+    clearCartBtn.addEventListener("click", () => {
+        cartItems.length = 0;
+        updateCart();
+    });
+
+    updateCart();
 });
