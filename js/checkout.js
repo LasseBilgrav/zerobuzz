@@ -1,5 +1,6 @@
 "use strict";
 
+<<<<<<< HEAD
 // Varekurv struktur
 let cart = {
     items: {},
@@ -198,3 +199,5 @@ function handleCheckout() {
         updateCartDisplay();
     }
 }
+=======
+>>>>>>> 46b8e5998901d89ad5f42d6913eb1e54f5b99051

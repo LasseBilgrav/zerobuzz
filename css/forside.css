@@ -17,3 +17,21 @@ video {
     height: auto;
     object-fit: cover;
 }
+
+#shop-button {
+    background-color: var(--button-color);
+    color: black;
+    font-family:"aladin", sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none
+}
+
+#shop-button:hover {
+    background-color: #5eb7dd;
+    transition: 0.3s;
+}
