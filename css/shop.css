@@ -106,6 +106,100 @@
 
 
 
+/* General styling */
+.cart-container {
+    background-color: #A9C8F1; /* Light blue background */
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px; /* Adjust width as needed */
+    position: fixed;
+    right: 10px;
+    top: 20px;
+}
+
+/* Cart header */
+.cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Shopping cart icon */
+.cart-header svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Cart items */
+.cart-items {
+    margin-top: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.cart-item-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cart-item-price {
+    font-size: 14px;
+}
+
+/* Quantity buttons */
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+}
+
+.cart-button {
+    background-color: #7AB5F8;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+.cart-button:hover {
+    background-color: #5593D7;
+}
+
+/* Total price */
+.cart-total {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Clear cart button */
+.clear-cart {
+    display: block;
+    width: 100%;
+    background-color: #FF6961;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.clear-cart:hover {
+    background-color: #D9534F;
+}
 
 
 
