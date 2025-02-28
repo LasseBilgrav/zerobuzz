@@ -174,15 +174,19 @@
 }
 
 .popup-image {
-    width: 100px;
+    position: absolute;
+    top: -10rem;
+    left: -1rem;
+    transform: rotate(20deg);
+    width: 15rem;
     height: auto;
-    margin-bottom: 10px;
 }
 
 .popup-sliders {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1rem;
+    margin-top: 10rem;
 }
 
 .slider-container {
@@ -192,11 +196,14 @@
 }
 
 .popup-description {
-    margin-top: 1rem;
+    margin-top: 9rem;
+    margin-left: 14rem;
     font-size: 2rem;
     font-family: "aladin", sans-serif;
     font-weight: bold;
     width: 50%;
+    display: flex
+;
 }
 
 /* popup slut*/
