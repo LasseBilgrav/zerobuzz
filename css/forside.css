@@ -38,6 +38,7 @@ video {
     cursor: pointer;
     text-decoration: none;
     z-index: 1; 
+    margin-top: -30rem;
 }
 
 #shop-button:hover {
