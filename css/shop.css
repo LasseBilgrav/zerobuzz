@@ -192,8 +192,11 @@
 }
 
 .popup-description {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-family: "aladin", sans-serif;
+    font-weight: bold;
+    width: 50%;
 }
 
 /* popup slut*/
