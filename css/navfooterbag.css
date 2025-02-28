@@ -148,6 +148,7 @@ main {
 
 .social-links {
     display: flex;
+    flex-direction: row;
     gap: 1rem;
     margin-right: -1.5rem;
 }
