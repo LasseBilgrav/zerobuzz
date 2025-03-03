@@ -38,7 +38,7 @@ video {
     cursor: pointer;
     text-decoration: none;
     z-index: 1; 
-    margin-top: -30rem;
+    margin-top: -25rem;
 }
 
 #shop-button:hover {
@@ -70,7 +70,14 @@ video {
 
 .hero h1 {
     font-size: 4rem;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    font-family: "aladin", sans-serif;
+    line-height: 0.8;
+}
+
+.hero h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
     font-family: "aladin", sans-serif;
 }
 
