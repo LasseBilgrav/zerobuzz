@@ -38,8 +38,13 @@ video {
     cursor: pointer;
     text-decoration: none;
     z-index: 1; 
-    margin-top: -25rem;
+    margin-top: -75rem;
+    margin-bottom: 1rem;
+    position: sticky;
+    display: inline-block;
+    top: 25rem;
 }
+
 
 #shop-button:hover {
     background-color: #57a9cd;
