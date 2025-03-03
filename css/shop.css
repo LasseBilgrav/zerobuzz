@@ -262,4 +262,9 @@ input#blomstslider {
 ;
 }
 
+.sol-slider::-webkit-slider-runnable-track {
+    background: #CA9CAB;
+    border-radius: 5px;
+}
+
 /* popup slut*/
