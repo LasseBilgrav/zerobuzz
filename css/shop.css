@@ -241,7 +241,7 @@
     justify-content: space-around;
 }
 
-.sliders {
+.slider {
     width: 12rem;
 }
 
@@ -250,7 +250,6 @@
     gap: 0.6rem;
     flex-direction: column;
 }
-
 
 .popup-description {
     margin-top: 9rem;
@@ -262,6 +261,4 @@
     display: flex
 ;
 }
-
-
 /* popup slut*/
