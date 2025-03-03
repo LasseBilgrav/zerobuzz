@@ -34,11 +34,16 @@ function createCheckoutContainer() {
         </div>
         <div class="cart-total">Total: 0 kr</div>
         <button class="checkout-button" style="display: none;">Checkout</button>
+        <button class="clear-cart-button" style="display: none;">Tøm kurv</button>
     `;
     
     // Tilføj checkout knap styling
     const style = document.createElement('style');
     style.textContent = `
+        .cart-container {
+            width: 10%; /* Reduceret til 70% af original bredde */
+            margin: 0 auto; /* Centrerer boksen */
+        }
         .cart-total {
             margin-top: 10px;
             font-weight: bold;
@@ -57,6 +62,20 @@ function createCheckoutContainer() {
         }
         .checkout-button:hover {
             background-color: #45a049;
+        }
+        .clear-cart-button {
+            margin-top: 5px;
+            width: 100%;
+            padding: 8px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .clear-cart-button:hover {
+            background-color: #d32f2f;
         }
         .cart-count {
             background-color: white;
@@ -77,6 +96,10 @@ function createCheckoutContainer() {
     // Tilføj event listener til checkout knap
     const checkoutButton = checkoutContainer.querySelector('.checkout-button');
     checkoutButton.addEventListener('click', handleCheckout);
+    
+    // Tilføj event listener til tøm kurv knap
+    const clearCartButton = checkoutContainer.querySelector('.clear-cart-button');
+    clearCartButton.addEventListener('click', clearCart);
 }
 
 // Funktion til at opsætte knap event listeners
@@ -153,6 +176,20 @@ function handleRemoveFromCart(event) {
     }
 }
 
+// Ny funktion til at tømme kurven
+function clearCart() {
+    // Nulstil kurv
+    cart.items = {};
+    cart.totalQuantity = 0;
+    cart.totalPrice = 0;
+    
+    // Opdater visning
+    updateCartDisplay();
+    
+    // Vis bekræftelse til brugeren
+    alert('Din kurv er nu tom');
+}
+
 // Funktion til at opdatere kurv visning
 function updateCartDisplay() {
     // Opdater antal
@@ -182,6 +219,10 @@ function updateCartDisplay() {
     // Vis/skjul checkout knap
     const checkoutButton = document.querySelector('.checkout-button');
     checkoutButton.style.display = cart.totalQuantity > 0 ? 'block' : 'none';
+    
+    // Vis/skjul tøm kurv knap
+    const clearCartButton = document.querySelector('.clear-cart-button');
+    clearCartButton.style.display = cart.totalQuantity > 0 ? 'block' : 'none';
 }
 
 // Funktion til at håndtere checkout
