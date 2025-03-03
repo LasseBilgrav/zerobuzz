@@ -110,7 +110,6 @@
 
 /* General styling */
 .cart-container {
-    background-color: #A9C8F1; /* Light blue background */
     padding: 15px;
     border-radius: 10px;
     width: 250px; /* Adjust width as needed */
@@ -241,7 +240,7 @@
     justify-content: space-around;
 }
 
-.slider {
+.sliders {
     width: 12rem;
 }
 
