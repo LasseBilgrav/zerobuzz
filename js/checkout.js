@@ -49,7 +49,7 @@ function createCheckoutContainer() {
     const style = document.createElement('style');
     style.textContent = `
         .cart-container {
-            width: 10%;
+            width: 12%;
             position: fixed;
             right: 0;
             bottom: 20px;
