@@ -234,22 +234,23 @@
 
 .popup-sliders {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
-    margin-top: 10rem;
+    margin-top: 8rem;
     align-items: center;
+    justify-content: space-around;
 }
 
-input#blomstslider {
-    margin-left: -1.5rem;
+.sliders {
+    width: 12rem;
 }
 
-.slider-container {
+.slider-tekst {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 75%;
+    gap: 0.6rem;
+    flex-direction: column;
 }
+
 
 .popup-description {
     margin-top: 9rem;
@@ -260,11 +261,6 @@ input#blomstslider {
     width: 50%;
     display: flex
 ;
-}
-
-.sol-slider::-webkit-slider-runnable-track {
-    background: #CA9CAB;
-    border-radius: 5px;
 }
 
 
