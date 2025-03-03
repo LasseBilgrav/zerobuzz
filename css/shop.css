@@ -18,6 +18,8 @@
     gap: 4rem;
     max-width: 75%;
     margin: 0 auto;
+    padding-top: 4rem;
+    padding-bottom: 7rem;
 }
 
 /* Produktkort */
@@ -114,7 +116,7 @@
     width: 250px; /* Adjust width as needed */
     position: fixed;
     right: 10px;
-    top: 20px;
+    top: 80px;
 }
 
 /* Cart header */
