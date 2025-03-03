@@ -83,3 +83,12 @@ video {
     font-size: 1.2rem;
     line-height: 1.6;
 }
+
+.infographic {
+    text-align: center;
+}
+
+.infographic img {
+    width: 80%;
+    border-radius: 10px;
+}
