@@ -7,8 +7,8 @@ let cart = {
     totalPrice: 0
 };
 
-// Tilstand for checkout container
-let isCheckoutMinimized = false;
+// Tilstand for checkout container - ændret til true for at starte minimeret
+let isCheckoutMinimized = true;
 
 // Initialiser når DOM er indlæst
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Funktion til at oprette checkout container
 function createCheckoutContainer() {
     const checkoutContainer = document.createElement('div');
-    checkoutContainer.className = 'cart-container';
+    checkoutContainer.className = 'cart-container minimized'; // Tilføj 'minimized' klasse fra start
     checkoutContainer.innerHTML = `
         <div class="cart-header">
             <div class="cart-toggle">
@@ -33,7 +33,7 @@ function createCheckoutContainer() {
                 </svg>
                 <span class="cart-count">0</span>
             </div>
-            <button class="minimize-button">▼</button>
+            <button class="minimize-button">◀</button> <!-- Ændret til venstre-pil som standard -->
         </div>
         <div class="cart-content">
             <div class="cart-items">
@@ -49,7 +49,7 @@ function createCheckoutContainer() {
     const style = document.createElement('style');
     style.textContent = `
         .cart-container {
-            width: 12%;
+            width: 10%;
             position: fixed;
             right: 0;
             bottom: 20px;
@@ -60,7 +60,7 @@ function createCheckoutContainer() {
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
             z-index: 1000;
-            max-height: 60vh; /* Add maximum height relative to viewport */
+            max-height: 80vh; /* Add maximum height relative to viewport */
             overflow-y: auto; /* Allow scrolling if content exceeds max height */
         }
         
