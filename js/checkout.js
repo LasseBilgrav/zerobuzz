@@ -68,6 +68,7 @@ function createCheckoutContainer() {
             width: auto;
             transform: translateX(calc(100% - 6rem));
             padding: 5px 10px;
+            margin-right: 1rem;
             height: 40px; /* Explicitly set a small height when minimized */
             overflow: hidden;
         }
@@ -87,6 +88,7 @@ function createCheckoutContainer() {
         .cart-toggle {
             display: flex;
             align-items: center;
+            gap: 5px; /* Lidt mellemrum mellem ikon og tæller */
         }
         
         .cart-toggle svg {
@@ -170,14 +172,13 @@ function createCheckoutContainer() {
         }
         
         .cart-count {
-            background-color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 24px;  /* Fast bredde */
+            height: 24px; /* Fast højde */
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            min-width: 24px; /* Sikrer at den ikke skalerer */
         }
     `;
     document.head.appendChild(style);
