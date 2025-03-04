@@ -53,6 +53,7 @@ function createCheckoutContainer() {
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
+            margin-right: 1rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
             z-index: 1000;
