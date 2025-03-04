@@ -89,6 +89,7 @@ video {
 .hero h3 {
     color: #666;
     font-size: 2rem;
+    font-family: "myriad-pro", sans-serif;
 }
 
 .hero p {
