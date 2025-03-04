@@ -26,11 +26,7 @@ function createCheckoutContainer() {
     checkoutContainer.innerHTML = `
         <div class="cart-header">
             <div class="cart-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
+                <img src="../img/shopping-cart.svg" alt="Shopping Cart" class="cart-icon">
                 <span class="cart-count">0</span>
             </div>
             <button class="minimize-button">◀</button> <!-- Ændret til venstre-pil som standard -->
@@ -68,8 +64,15 @@ function createCheckoutContainer() {
             width: auto;
             transform: translateX(calc(100% - 6rem));
             padding: 5px 10px;
+            margin-right: 1rem;
             height: 40px; /* Explicitly set a small height when minimized */
             overflow: hidden;
+        }
+
+        .cart-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
         }
         
         .cart-header {
@@ -87,6 +90,7 @@ function createCheckoutContainer() {
         .cart-toggle {
             display: flex;
             align-items: center;
+            gap: 5px; /* Lidt mellemrum mellem ikon og tæller */
         }
         
         .cart-toggle svg {
@@ -170,14 +174,13 @@ function createCheckoutContainer() {
         }
         
         .cart-count {
-            background-color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 24px;  /* Fast bredde */
+            height: 24px; /* Fast højde */
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            min-width: 24px; /* Sikrer at den ikke skalerer */
         }
     `;
     document.head.appendChild(style);
