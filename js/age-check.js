@@ -6,17 +6,29 @@ function checkAge() {
         return; // Stop the function, user is already verified
     }
 
-    let birthdate = prompt("Indtast din fødselsdato i følgende format: (YYYY-MM-DD):");
+    let birthdate = prompt("Indtast din fødselsdato i følgende format: (DDMMÅÅÅÅ):");
 
     // Validate format
-    if (!birthdate || !/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
-        alert("Forkert format! Indtast din fødselsdato i følgende format: (YYYY-MM-DD)");
+    if (!birthdate || !/^\d{2}\d{2}\d{4}$/.test(birthdate)) {
+        alert("Forkert format! Indtast din fødselsdato i følgende format: (DDMMÅÅÅÅ)");
         return checkAge(); // Ask again
     }
 
+    // Convert from DDMMYYYY to a date object
+    const day = parseInt(birthdate.substring(0, 2));
+    const month = parseInt(birthdate.substring(2, 4)) - 1; // JavaScript months are 0-indexed
+    const year = parseInt(birthdate.substring(4, 8));
+    
+    // Create date object
+    let birthDateObj = new Date(year, month, day);
+    
+    // Check if the date is valid
+    if (birthDateObj.getDate() !== day || birthDateObj.getMonth() !== month || birthDateObj.getFullYear() !== year) {
+        alert("Ugyldig dato! Indtast venligst en gyldig dato.");
+        return checkAge(); // Ask again
+    }
 
     // Calculate age
-    let birthDateObj = new Date(birthdate);
     let today = new Date();
     let age = today.getFullYear() - birthDateObj.getFullYear();
     
